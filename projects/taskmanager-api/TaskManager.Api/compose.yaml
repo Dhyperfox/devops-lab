@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
 
-    image: taskmanager-api:1.6
+    image: ghcr.io/dhyperfox/taskmanager-api:${IMAGE_TAG:?IMAGE_TAG is required}
 
     restart: unless-stopped
 
