@@ -1,0 +1,58 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    image: taskmanager-api:1.6
+
+    restart: unless-stopped
+
+    ports:
+
+      - "127.0.0.1:5001:8080"
+
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__DefaultConnection: "Host=taskmanager-db;Port=5432;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}"
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    networks:
+      - taskmanager-network
+
+  db:
+    image: postgres:18
+    container_name: taskmanager-db
+
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+    volumes:
+      - db-data:/var/lib/postgresql
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$POSTGRES_USER\" -d \"$POSTGRES_DB\""]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+    networks:
+      - taskmanager-network
+
+volumes:
+  db-data:
+    external: true
+    name: taskmanager-db-data
+
+networks:
+  taskmanager-network:
+    external: true
+    name: taskmanager-network
