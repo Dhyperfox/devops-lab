@@ -40,7 +40,7 @@ jobs:
         working-directory: projects/taskmanager-api/TaskManager.Tests
 
       - name: Build Docker image
-        run: docker build -t taskmanager-api:latest .
+        run: docker build -t ghcr.io/dhyperfox/taskmanager-api:latest .
         working-directory: projects/taskmanager-api/TaskManager.Api
 
       - name: Log in to GitHub Container Registry
