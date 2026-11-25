@@ -1,6 +1,8 @@
 # Build stage
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 
+LABEL org.opencontainers.image.source="https://github.com/Dhyperfox/devops-lab"
+
 WORKDIR /src
 
 COPY . .
