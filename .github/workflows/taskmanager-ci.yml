@@ -1,0 +1,36 @@
+name: TaskManager CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+        working-directory: projects/taskmanager-api/TaskManager.Api
+
+      - name: Build application
+        run: dotnet build --configuration Release
+        working-directory: projects/taskmanager-api/TaskManager.Api
+     
+      - name: Build test project
+        run: dotnet build --configuration Release
+        working-directory: projects/taskmanager-api/TaskManager.Tests
+     
+      - name: Run unit tests
+        run: dotnet test --no-build --configuration Release
+        working-directory: projects/taskmanager-api/TaskManager.Tests
