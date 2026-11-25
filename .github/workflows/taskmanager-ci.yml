@@ -34,3 +34,7 @@ jobs:
       - name: Run unit tests
         run: dotnet test --no-build --configuration Release
         working-directory: projects/taskmanager-api/TaskManager.Tests
+
+      - name: Build Docker image
+        run: docker build -t taskmanager-api:ci .
+        working-directory: projects/taskmanager-api/TaskManager.Api
