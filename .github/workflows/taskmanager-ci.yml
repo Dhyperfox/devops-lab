@@ -40,7 +40,7 @@ jobs:
         working-directory: projects/taskmanager-api/TaskManager.Tests
 
       - name: Build Docker image
-        run: docker build -t ghcr.io/dhyperfox/taskmanager-api:latest .
+        run: docker build -t ghcr.io/dhyperfox/taskmanamanager-api:${GITHUB_SHA::7} .
         working-directory: projects/taskmanager-api/TaskManager.Api
 
       - name: Log in to GitHub Container Registry
@@ -51,4 +51,4 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push Docker image
-        run: docker push ghcr.io/dhyperfox/taskmanager-api:latest
+        run: docker push ghcr.io/dhyperfox/taskmanager-api:${GITHUB_SHA::7}
