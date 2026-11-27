@@ -1,0 +1,55 @@
+body {
+    background-color: #f5f7fa;
+    color: #212529;
+    min-height: 100vh;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+h1 {
+    font-weight: 700;
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+}
+
+.list-group-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border-color: #e9ecef;
+}
+
+.task-title {
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.task-completed {
+    text-decoration: line-through;
+    color: #6c757d;
+}
+
+.task-actions {
+    display: flex;
+    gap: 8px;
+    margin-left: 16px;
+}
+
+@media (max-width: 576px) {
+    .list-group-item {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .task-actions {
+        margin-left: 0;
+    }
+}
